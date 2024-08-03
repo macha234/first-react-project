@@ -1,14 +1,35 @@
-import Slider from "./Slider"
-import Header from "./Header"
-import Footer from "./footer"
+import { useState } from "react"
 
 function App() {
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
+  const [yearOfBirth, setYearOfBirth] = useState("")
+  const [age, setAge] = useState("")
+
+  function onSubmit(event) {
+    event.preventDefault()
+    const caculateAge = currentYear - yearOfBirth
+
+    setAge(caculateAge)
+  }
+
   return (
    <>
-   <Header />
-   <Slider />
-   <Footer />
+   <h1>{age}</h1>
 
+   <form onSubmit={onSubmit}>
+    <div>
+      <input
+      type="text"
+      nmae="yearOfBirth"
+      value={yearOfBirth}
+      onChange={(event) => setYearOfBirth(event.target.value)}
+      />
+    </div>
+
+    <div>
+      <button type="submit">submit</button>
+    </div>
+   </form>
    </>
   )
 }
